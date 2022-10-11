@@ -18,7 +18,7 @@ class FirstTaskSpider(scrapy.Spider):
     def parse(self, response, **kwargs):
         items = CrawlerItem()
 
-        rows = response.xpath('.//tr')[1:]
+        rows = response.xpath('//tr[position()>1]')
         for row in rows:
             score = str_to_void(row.xpath('.//td[1]/text()').extract_first())
             occupation = row.xpath('.//td[2]/a/text()').extract_first()
