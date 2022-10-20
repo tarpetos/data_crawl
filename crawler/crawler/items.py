@@ -7,4 +7,7 @@ class CrawlerItem(scrapy.Item):
     occupation = scrapy.Field()
     code = scrapy.Field()
 
-    #
+    # proxy items
+    ip_address = scrapy.Field()
+    port = scrapy.Field()
+    https = scrapy.Field()
