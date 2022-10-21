@@ -29,3 +29,4 @@ class OnetCodeScraper(scrapy.Spider):
             items['code'] = soc_code
 
             yield items
+
