@@ -8,14 +8,14 @@ def str_to_void(s):
     return str(s)
 
 
-class FirstTaskSpider(scrapy.Spider):
+class OnetCodeScraper(scrapy.Spider):
     name = 'scrap'
 
     start_urls = [
         'https://www.onetcodeconnector.org/find/result?s=software%20developer&a=1',
     ]
 
-    def parse(self, response, **kwargs):
+    def parse(self, response):
         items = CrawlerItem()
 
         rows = response.xpath('//tr[position()>1]')
@@ -29,3 +29,4 @@ class FirstTaskSpider(scrapy.Spider):
             items['code'] = soc_code
 
             yield items
+
