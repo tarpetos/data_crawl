@@ -4,7 +4,8 @@ from ..items import CrawlerItem
 
 class ProxyScraperAnother(scrapy.Spider):
     name = 'proxy_scrap_another'
-    page_number = 64
+    start = 64
+
     start_urls = [
         'https://hidemy.name/en/proxy-list/',
     ]
@@ -21,11 +22,12 @@ class ProxyScraperAnother(scrapy.Spider):
 
             items['ip_address'] = ip_address
             items['port'] = port
-            items["https"] = True if https == "HTTPS" else False
+            items['https'] = True if https == 'HTTPS' else False
 
             yield items
 
-        next_page = 'https://hidemy.name/en/proxy-list/?start=' + str(ProxyScraperAnother.page_number) + '#list'
-        if ProxyScraperAnother.page_number <= 4800:
-            ProxyScraperAnother.page_number += 64
+        next_page = f'https://hidemy.name/en/proxy-list/?start={ProxyScraperAnother.start}#list'
+
+        if ProxyScraperAnother.start <= 4800:
+            ProxyScraperAnother.start += 64
             yield response.follow(next_page, callback=self.parse)
