@@ -1,3 +1,6 @@
 *.pyc
 .idea/
 crawler/data.json
+crawler/result.db
+crawler/onet_code_db.sql
+crawler/proxy_db.sql
