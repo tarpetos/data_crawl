@@ -1,4 +1,3 @@
-import sqlite3
 import mysql
 import mysql.connector
 
@@ -38,9 +37,13 @@ class ProxyCrawlerPipeline:
 
 
 class CrawlerPipeline:
-
     def __init__(self):
-        self.con = sqlite3.connect('result.db')
+        self.con = mysql.connector.connect(
+            host='localhost',
+            user='root',
+            passwd='1111',
+            database='onet_code_db'
+        )
         self.cur = self.con.cursor()
         self.create_table()
 
@@ -48,6 +51,7 @@ class CrawlerPipeline:
         self.cur.execute(
             """
             CREATE TABLE IF NOT EXISTS stored_data(
+                id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                 score VARCHAR(10),
                 occupation VARCHAR(100),
                 code VARCHAR(25)
@@ -57,7 +61,7 @@ class CrawlerPipeline:
 
     def process_item(self, item, spider):
         self.cur.execute(
-            "INSERT INTO stored_data VALUES (?,?,?)",
+            "INSERT INTO stored_data(score, occupation, code) VALUES (%s, %s, %s)",
             (item['score'], item['occupation'], item['code'])
         )
 

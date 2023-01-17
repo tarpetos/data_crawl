@@ -21,6 +21,6 @@ class ProxyScraper(scrapy.Spider):
 
             items['ip_address'] = ip_address
             items['port'] = port
-            items["https"] = True if https == "yes" else False
+            items['https'] = True if https == 'yes' else False
 
             yield items
